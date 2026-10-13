@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "cityflo-otp": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-m", "cityflo_otp.server"]
+    }
+  }
+}
