@@ -29,12 +29,12 @@ BRIEF.md, DATA_GUIDE.md, HANDOFF.md, data/trips.csv, data/schedule_v2.csv, data/
 ## Scope question
 - trips.csv covers Mon 08-03 through **Sun 08-09** (7 days). HANDOFF/ops_log frame this as a **Friday review** of "this week," and ops_log.txt only has entries for Mon-Fri. Whether Sat/Sun trips belong in the verdict Priya is presenting Friday is an open scope question the data does not resolve.
 
-## ops_log.txt cross-check (does not join on any key — narrative only)
-- Wed 08-05 AM: log claims "waterlogged, western corridor diverted ~35min **all AM**."
-  Actual data: only **route R-35** shows elevated lateness on Wed 08-05, and it is NOT limited to AM — all 19 of R-35's trips that day (6:35 through 21:51 scheduled departures) ran 36-61 min late. Every other route's Wed-AM average (2.80 min) is barely different from the week's baseline (~1.5-1.8 min). R-35 itself is normal on all six other days (means between -3.1 and +1.6 min).
-  **This is a direct conflict between the ops narrative (citywide, AM-only, weather-caused) and the GPS data (single-route, all-day, isolated to R-35).** This is the single largest lateness signal in the dataset and will need a defended call on citywide-weather vs. route-isolated-failure.
-- Fri 08-07 "all normal, good day" is consistent with the data: Friday's mean lateness (1.50 min, n=753) is the lowest of the week.
-- Tue 21:40 no-show, Thu AC swap, Wed evening festival/citywide slowdown: no corroborating pattern found yet at the route level (not deeply investigated — logged as unresolved, not ruled out).
+## ops_log.txt cross-check — conclusion withdrawn (verification pass, 2026-10-13)
+HANDOFF.md calls `ops_log.txt` **"last week's ops log"**, while `trips.csv` is **"this week's GPS export"**. `ops_log.txt` uses weekday labels only, never dates. So the log's "Wed" may or may not be 2026-08-05, and these files can't tell which.
+
+The mismatch itself is real and stays on record. The log describes a city-wide, AM-only slowdown. The GPS shows one route, R-35, late all day, and other routes' Wed AM mean of 1.46 min (corrected from the 2.80 originally reported, which included R-35). What is withdrawn is the earlier framing that this is a "direct conflict" needing a call on weather vs. route failure. It could be a contradiction, or two different weeks. DECISION.md shows the comparison with that caveat. The R-35 incident rests on GPS evidence alone: 19/19 trips on 2026-08-05 ran 36–61 min late (departures 06:35–20:21), day-median 52, every other day 0–2. No cause is claimed.
+
+Numeric corrections to this file are listed under **Errata** at the end.
 
 ## What the data CAN support
 - A per-trip elapsed time (`actual_arrival - scheduled_departure`) compared to that trip's own `scheduled_runtime_min`, for 5,267 of 5,292 rows (99.5%) with parseable timestamps and standard tz_offset.
@@ -52,6 +52,7 @@ BRIEF.md, DATA_GUIDE.md, HANDOFF.md, data/trips.csv, data/schedule_v2.csv, data/
 
 - Defect 1: the 24 `08:60` rows span **19** routes, not 21.
 - Defect 3: **18** rows (not 19) have arrival before departure, excluding the tz row. They span **15** routes, not 14.
-- ops_log cross-check: R-35's Wednesday scheduled departures run 06:35–**20:21** (not 21:51). The "2.80 min" Wed-AM figure included R-35; other routes' Wed AM mean is 1.46.
+- ops_log cross-check: R-35's Wednesday scheduled departures run 06:35–**20:21**. The last trip, T1-04513, departed 20:21 and arrived 22:00. "21:51" matches no R-35 Wednesday row, and where it came from isn't known. The "2.80 min" Wed-AM figure included R-35; other routes' Wed AM mean is 1.46.
+- "What the data CANNOT prove" below still says "19 negative-elapsed rows". The correct count is 18.
 - "Friday's mean is the lowest of the week" holds only for the pre-REC-114 inspection computation. Under the final rule, Friday's mean is 1.68, mid-range among non-Wednesday days (1.57–1.86). It is still consistent with "all normal".
 - HANDOFF calls `ops_log.txt` "**last week's** ops log", and the log names weekdays, not dates. Its "Wed" is not necessarily 2026-08-05.

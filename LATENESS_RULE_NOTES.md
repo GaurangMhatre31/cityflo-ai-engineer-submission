@@ -32,7 +32,7 @@ Sensitivity tested: repairing the 24 rows instead of excluding changes **zero** 
 
 All 19 of R-35's trips on Wed 08-05 ran 36-61 min late (day-median 52 min, trip range 36-61). Every other day that week R-35 averages 0-2 min.
 
-ops_log.txt: "Wed 06:40 SV Road waterlogged, western corridor diverted ~35min all AM." Data: elevated lateness on Wed is isolated to R-35 alone (every other route's Wed-AM average is 2.80 min, near baseline) and runs all day (6:35am-9:51pm), not just AM. **Stated without inventing a cause:** the data's shape (single-route, all-day) does not match the ops-log narrative's shape (citywide, AM-only). Both could independently be true; the data cannot adjudicate which.
+**Correction (2026-10-13 verification pass):** HANDOFF.md explicitly calls `ops_log.txt` "last week's ops log," while `trips.csv` is "this week's GPS export"; ops_log only ever uses weekday labels, never dates. So its "Wed" may or may not be 2026-08-05, and the files can't tell which. The mismatch stands as an observation. The log describes a city-wide, AM-only slowdown. The data shows R-35 alone, all day, with other routes' Wed AM mean at 1.46 min (the "2.80" above included R-35, and the last R-35 departure was 20:21, not 21:51). Calling it a "conflict" is withdrawn: it may be two different weeks. DECISION.md shows the comparison with that caveat, and the R-35 incident rests on GPS evidence alone, with no claimed cause.
 
 ## 5. Incident-flag rule — defined and tested
 
